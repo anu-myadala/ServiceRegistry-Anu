@@ -1,0 +1,6 @@
+flowchart LR
+  C[Client] -->|GET /discover/inventory-service| R[Service Registry<br/>:5001]
+  S1[Service Instance A<br/>:8001] -->|POST /register + /heartbeat| R
+  S2[Service Instance B<br/>:8002] -->|POST /register + /heartbeat| R
+  C -->|GET /hello (random instance)| S1
+  C -->|GET /hello (random instance)| S2

@@ -446,3 +446,54 @@ This is an educational project. Feel free to:
 - Improve documentation
 - Create additional examples
 - Share your learnings!
+ 
+## ✅ Assignment: Service Discovery (2 instances + random client)
+
+### What this demonstrates
+- Run **2 instances** of the same service (`inventory-service`) on different ports (`8001`, `8002`)
+- Each instance **registers** and sends **heartbeats** to the registry (`service_registry_improved.py`)
+- A client **discovers** instances via `GET /discover/inventory-service`
+- The client **randomly selects** one discovered instance and calls `/hello`
+
+### Run (one command)
+```bash
+chmod +x run_assignment_demo.sh
+./run_assignment_demo.sh
+Manual run (4 terminals)
+Terminal 1 — registry
+
+bash
+python3 service_registry_improved.py
+Terminal 2 — service instance A
+
+bash
+python3 discovered_service.py inventory-service 8001 a http://localhost:5001
+Terminal 3 — service instance B
+
+bash
+python3 discovered_service.py inventory-service 8002 b http://localhost:5001
+Terminal 4 — client (run multiple times)
+
+bash
+python3 client_random_call.py inventory-service http://localhost:5001
+Demo video checklist
+Start the registry
+Start instance A + instance B (show “registered …” output)
+Run the client 5–10 times and show it randomly selects http://localhost:8001 and http://localhost:8002
+(Optional) stop one instance and show it disappears after heartbeat timeout
+MD
+Code
+
+---
+
+### 3) Commit + push
+```bash
+git status
+git add discovered_service.py client_random_call.py run_assignment_demo.sh architecture/diagram.mmd README.md
+git commit -m "Add assignment demo: 2 instances + random discovery client"
+git push origin main
+4) Test it locally
+bash
+./run_assignment_demo.sh
+If you get an error at any step, paste the exact terminal output and I’ll tell you the fix.
+```
