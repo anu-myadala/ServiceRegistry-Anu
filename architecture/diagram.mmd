@@ -1,19 +1,22 @@
-flowchart LR
-  subgraph Client
-    C[Client]
+flowchart TD
+  User[User]
+  Order[Order Service (client)]
+  Registry[Service Registry\n(register / discover / heartbeat / deregister)\n:5001]
+
+  User -->|HTTP: place order| Order
+  Order -->|GET /discover/inventory-service| Registry
+
+  subgraph InventoryInstances [Inventory Services]
+    direction LR
+    IS1[Inventory Service #1\n:8002]
+    IS2[Inventory Service #2\n:8003]
   end
 
-  subgraph Registry
-    R[Service Registry\n:5001]
-  end
+  IS1 -->|POST /register + heartbeat| Registry
+  IS2 -->|POST /register + heartbeat| Registry
 
-  subgraph Services
-    S1[Inventory - instance A\n:8001]
-    S2[Inventory - instance B\n:8002]
-  end
+  Order -->|GET /hello (random)| IS1
+  Order -->|GET /hello (random)| IS2
 
-  C -->|GET /discover/<service>| R
-  S1 -->|POST /register /heartbeat| R
-  S2 -->|POST /register /heartbeat| R
-  C -->|GET /hello (random)| S1
-  C -->|GET /hello (random)| S2
+  classDef box fill:#fff,stroke:#333,stroke-width:1px;
+  class User,Order,Registry,IS1,IS2 box;
