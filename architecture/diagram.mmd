@@ -1,6 +1,19 @@
 flowchart LR
-  C[Client] -->|GET /discover/inventory-service| R[Service Registry<br/>:5001]
-  S1[Service Instance A<br/>:8001] -->|POST /register + /heartbeat| R
-  S2[Service Instance B<br/>:8002] -->|POST /register + /heartbeat| R
-  C -->|GET /hello (random instance)| S1
-  C -->|GET /hello (random instance)| S2
+  subgraph Client
+    C[Client]
+  end
+
+  subgraph Registry
+    R[Service Registry\n:5001]
+  end
+
+  subgraph Services
+    S1[Inventory - instance A\n:8001]
+    S2[Inventory - instance B\n:8002]
+  end
+
+  C -->|GET /discover/<service>| R
+  S1 -->|POST /register /heartbeat| R
+  S2 -->|POST /register /heartbeat| R
+  C -->|GET /hello (random)| S1
+  C -->|GET /hello (random)| S2
