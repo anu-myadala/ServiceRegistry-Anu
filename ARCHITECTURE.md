@@ -34,6 +34,8 @@
 
 This document is a concise reference for the in-repo Service Registry demo. The interactive Mermaid diagram is at `architecture/diagram.mmd` and shows the client, registry, and two service instances.
 
+![Architecture Diagram](architecture/diagram.png)
+
 Key points
 - Registry port: 5001 (see `service_registry_improved.py`)  
 - Services register and send heartbeats every 10s (configurable in code)  

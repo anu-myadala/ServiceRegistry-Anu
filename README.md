@@ -56,6 +56,8 @@ A **Service Registry** is a database of available service instances in a distrib
 ## 🏗️ Architecture
 Interactive Mermaid diagram: `architecture/diagram.mmd` (GitHub may render Mermaid inline depending on viewer/plugins)
 
+![Architecture Diagram](architecture/diagram.png)
+
 ```
 ┌─────────────┐         ┌─────────────────┐         ┌─────────────┐
 │  Service A  │────────▶│ Service Registry │◀────────│  Service B  │
