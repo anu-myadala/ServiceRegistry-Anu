@@ -1,6 +1,6 @@
 flowchart TD
   User[User]
-  Order[Order Service (client)]
+  Order[Order Service (client_random_call.py)]
   Registry[Service Registry\n(register / discover / heartbeat / deregister)\n:5001]
 
   User -->|HTTP: place order| Order
@@ -8,8 +8,8 @@ flowchart TD
 
   subgraph InventoryInstances [Inventory Services]
     direction LR
-    IS1[Inventory Service #1\n:8002]
-    IS2[Inventory Service #2\n:8003]
+  IS1[Inventory Service #1\n:8001]
+  IS2[Inventory Service #2\n:8002]
   end
 
   IS1 -->|POST /register + heartbeat| Registry
