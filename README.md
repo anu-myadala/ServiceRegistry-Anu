@@ -54,6 +54,7 @@ A **Service Registry** is a database of available service instances in a distrib
 - **Load Balancing**: Distribute requests across multiple service instances
 
 ## 🏗️ Architecture
+Interactive Mermaid diagram: `architecture/diagram.mmd` (GitHub may render Mermaid inline depending on viewer/plugins)
 
 ```
 ┌─────────────┐         ┌─────────────────┐         ┌─────────────┐
@@ -476,7 +477,6 @@ Terminal 4 — client (run multiple times)
 
 bash
 python3 client_random_call.py inventory-service http://localhost:5001
-Demo video checklist
 Start the registry
 Start instance A + instance B (show “registered …” output)
 Run the client 5–10 times and show it randomly selects http://localhost:8001 and http://localhost:8002
